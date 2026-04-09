@@ -9,8 +9,9 @@ public class DatabaseSeeder : IDatabaseSeeder
     private readonly string dbPath = Path.Combine(AppContext.BaseDirectory, "database.db");
 
 
-    /// Seeding method
+    /// <summary>
     /// Seeds the database with necessary tables and initial data if they do not already exist.
+    /// </summary>
     public void SeedDatabase()
     {
         using (var db = new SqliteConnection($"Data Source={dbPath}"))
@@ -22,7 +23,7 @@ public class DatabaseSeeder : IDatabaseSeeder
 
             createCommand.CommandText =
                 "CREATE TABLE IF NOT EXISTS " +
-                "Flights (Flight_number TEXT,Departure_place TEXT,ArrivalPlace TEXT,can_get_return_money TEXT)";
+                "Flights (FlightNumber TEXT,DeparturePlace TEXT,ArrivalPlace TEXT,CanGetReturnMoney TEXT)";
 
             createCommand.ExecuteReader();
             

@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
+using CheckMyFlightApi.Models;
 
-namespace CheckMyFlightApi.Models;
+namespace CheckMyFlightApi.DTOs;
 
 public class AviationStackResponse
 {
