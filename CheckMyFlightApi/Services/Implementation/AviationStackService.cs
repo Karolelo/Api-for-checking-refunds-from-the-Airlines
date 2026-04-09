@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using CheckMyFlightApi.DTOs;
-using CheckMyFlightApi.Services.Implementation;
+using CheckMyFlightApi.Services.Interfaces;
 
-namespace CheckMyFlightApi.Services.Interfaces;
+namespace CheckMyFlightApi.Services.Implementation;
 
 public class AviationStackService : IAviationStackService
 {

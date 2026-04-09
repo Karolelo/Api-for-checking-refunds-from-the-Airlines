@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using CheckMyFlightApi.DTOs;
-using CheckMyFlightApi.Services.Implementation;
+using CheckMyFlightApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheckMyFlightApi.Controllers;

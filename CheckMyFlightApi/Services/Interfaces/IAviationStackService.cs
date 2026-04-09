@@ -1,6 +1,6 @@
 ﻿using CheckMyFlightApi.DTOs;
 
-namespace CheckMyFlightApi.Services.Implementation;
+namespace CheckMyFlightApi.Services.Interfaces;
 
 public interface IAviationStackService
 {
