@@ -6,7 +6,7 @@ public interface IDelayAnalysisService
 {
     /// <summary>
     /// Gonna implemented here different status for returning
-    /// money to passenger and save it into canGetReturnMoney
+    /// money to passenger and save it into CanGetReturnMoney
     /// </summary>
     /// <returns></returns>
     string GetDelayStatus(FlightData data);

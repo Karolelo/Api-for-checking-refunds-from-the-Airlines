@@ -4,7 +4,7 @@ using CheckMyFlightApi.Services.Interfaces;
 
 namespace CheckMyFlightApi.Services.Implementation;
 /// <summary>
-/// If I had more time I would read about
+/// If I had more time, I would read about
 /// return policies in EU, but I haven't soo I simply this class 
 /// </summary>
 public class DelayAnalysisService : IDelayAnalysisService
@@ -39,7 +39,7 @@ public class DelayAnalysisService : IDelayAnalysisService
         return maxDelay > 15;
     }
 
-    public string GetDelayStatusByMinutes(int minutes)
+    private string GetDelayStatusByMinutes(int minutes)
     {
         return minutes switch
         {
@@ -57,7 +57,7 @@ public class DelayAnalysisService : IDelayAnalysisService
     /// for a delayed flight
     /// </summary>
     /// <returns></returns>
-    public int GetApproximatedAmountOfReturn(int minutes)
+    private int GetApproximatedAmountOfReturn(int minutes)
     {
         return minutes switch
         {

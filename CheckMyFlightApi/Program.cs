@@ -1,6 +1,8 @@
+using CheckMyFlightApi.Data.DbContext;
 using CheckMyFlightApi.Infrastructure;
 using CheckMyFlightApi.Services.Implementation;
 using CheckMyFlightApi.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace CheckMyFlightApi;
 
@@ -15,7 +17,14 @@ public class Program
         builder.Services.AddOpenApi();
         builder.Services.AddSwaggerGen();
         builder.Services.AddScoped<IAviationStackService, AviationStackService>();
+        builder.Services.AddScoped<IDelayAnalysisService,DelayAnalysisService>();
+        
         builder.Services.AddHttpClient<AviationStackService>();
+        
+        // Configuration of DbContext
+        var dbPath = Path.Combine(AppContext.BaseDirectory, "database.db");
+        builder.Services.AddDbContext<MyDbContext>(c => c.UseSqlite($"Data Source={dbPath}"));
+        
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
