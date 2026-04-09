@@ -26,7 +26,7 @@ public class DatabaseSeeder : IDatabaseSeeder
                 "FlightNumber TEXT NOT NULL," +
                 "DeparturePlace TEXT," +
                 "ArrivalPlace TEXT," +
-                "CanGetReturnMoney TEXT)";
+                "Information TEXT)";
 
             createCommand.ExecuteReader();
             

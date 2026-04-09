@@ -1,33 +1,26 @@
-﻿using System.Text.RegularExpressions;
-using CheckMyFlightApi.DTOs;
+﻿using CheckMyFlightApi.DTOs;
 using CheckMyFlightApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheckMyFlightApi.Controllers;
 
-[Route(("api/[controller]"))]
+[Route("api/[controller]")]
 [ApiController]
 public class FlightController : ControllerBase
 {
-    private readonly IAviationStackService _aviationStackService;
+    private readonly IFlightService _flightService;
     
-    public FlightController(IAviationStackService aviationStackService)
+    public FlightController(IFlightService flightService)
     {
-        _aviationStackService = aviationStackService;
+        _flightService = flightService;
     }
     
     [HttpGet]
     [Route("[action]")]
-    public async Task<ActionResult<AviationStackResponse>> GetFlightInfo(string flightNumber)
+    public async Task<ActionResult<FlightApiResponse>> GetFlightInfo(string flightNumber)
     {
-        if (!Regex.IsMatch(flightNumber, $"[A-Z\\d]{{4,6}}"))
-            return BadRequest("The flight number does not match");
-
-        var response = await _aviationStackService.GetFlightByFlightNumber(flightNumber);
-
-        if (response.Pagination.Count > 0)
-            return new ActionResult<AviationStackResponse>(response);
-
-        return NotFound("Sorry but we not found your flight");
+        var response = await _flightService.GetInformationAboutFlight(flightNumber);
+        
+        return response;
     }
 }
