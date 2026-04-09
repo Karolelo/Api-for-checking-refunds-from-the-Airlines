@@ -2,8 +2,9 @@
 
 public class Flight
 {
-    public string Flight_number { get; set; }
-    public string Departure_place { get; set; }
+    public int Id { get; set; } 
+    public string FlightNumber { get; set; }
+    public string DeparturePlace { get; set; }
     public string ArrivalPlace { get; set; }
-    public string canGetReturnMoney { get; set; }
+    public string CanGetReturnMoney { get; set; }
 }

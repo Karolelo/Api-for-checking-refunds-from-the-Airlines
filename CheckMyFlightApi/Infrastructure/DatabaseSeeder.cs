@@ -22,8 +22,11 @@ public class DatabaseSeeder : IDatabaseSeeder
             createCommand.Connection = db;
 
             createCommand.CommandText =
-                "CREATE TABLE IF NOT EXISTS " +
-                "Flights (FlightNumber TEXT,DeparturePlace TEXT,ArrivalPlace TEXT,CanGetReturnMoney TEXT)";
+                "CREATE TABLE Flights (Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "FlightNumber TEXT NOT NULL," +
+                "DeparturePlace TEXT," +
+                "ArrivalPlace TEXT," +
+                "CanGetReturnMoney TEXT)";
 
             createCommand.ExecuteReader();
             
