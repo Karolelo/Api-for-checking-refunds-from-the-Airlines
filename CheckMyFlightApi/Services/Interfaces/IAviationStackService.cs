@@ -10,5 +10,5 @@ public interface IAviationStackService
     /// </summary>
     /// <param name="flightNumber"></param>
     /// <returns></returns>
-    Task<AviationStackResponse> GetFlightByFlightNumber(string flightNumber);
+    Task<AviationStackResponse> GetFlightByFlightNumber(string flightNumber,CancellationToken cancellationToken);
 }

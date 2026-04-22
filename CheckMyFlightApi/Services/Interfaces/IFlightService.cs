@@ -5,5 +5,5 @@ namespace CheckMyFlightApi.Services.Interfaces;
 
 public interface IFlightService
 {
-    Task<ActionResult<FlightApiResponse>> GetInformationAboutFlight(string flightNumber);
+    Task<ActionResult<FlightApiResponse>> GetInformationAboutFlight(string flightNumber,CancellationToken cancellationToken);
 }

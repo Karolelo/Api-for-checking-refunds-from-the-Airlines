@@ -3,7 +3,7 @@ using CheckMyFlightApi.Models;
 using CheckMyFlightApi.Repositories.Interfaces;
 using CheckMyFlightApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Collections.Generic;
 namespace CheckMyFlightApi.Services.Implementation;
 
 public class FlightService : IFlightService
@@ -19,12 +19,12 @@ public class FlightService : IFlightService
         _flightRepository = flightRepository;
     }
 
-     public async Task<ActionResult<FlightApiResponse>> GetInformationAboutFlight(string flightNumber)
+     public async Task<ActionResult<FlightApiResponse>> GetInformationAboutFlight(string flightNumber,CancellationToken cancellationToken)
     {
         // Check if the flight is already finished and in the database
-        if (await _flightRepository.FlightExistsAsync(flightNumber))
+        if (await _flightRepository.FlightExistsAsync(flightNumber,cancellationToken))
         {
-            var existingFlight = await _flightRepository.GetFlightByFlightNumberAsync(flightNumber);
+            var existingFlight = await _flightRepository.GetFlightByFlightNumberAsync(flightNumber,cancellationToken);
             
             if (existingFlight != null)
             {
@@ -36,7 +36,7 @@ public class FlightService : IFlightService
         }
         
         // Flight not in a database, fetch from Aviation Stack API
-        var aviationStackResponse = await _aviationStackService.GetFlightByFlightNumber(flightNumber);
+        var aviationStackResponse = await _aviationStackService.GetFlightByFlightNumber(flightNumber,cancellationToken);
         
         if (aviationStackResponse?.Data == null || !aviationStackResponse.Data.Any())
         {
@@ -67,7 +67,7 @@ public class FlightService : IFlightService
                 Information = delayStatus
             };
             
-            await _flightRepository.AddAsync(flight);
+            await _flightRepository.AddAsync(flight,cancellationToken);
             
             return new FlightApiResponse
             {
@@ -75,7 +75,8 @@ public class FlightService : IFlightService
                           $"Status: {flightData.FlightStatus}. {delayStatus}"
             };
         }
-        
+
+        var num = new HashSet<int>();
         // Flight is still active
         return new FlightApiResponse
         {

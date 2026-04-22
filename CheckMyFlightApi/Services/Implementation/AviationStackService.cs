@@ -15,16 +15,16 @@ public class AviationStackService : IAviationStackService
         _configuration = configuration;
     }
 
-    public async Task<AviationStackResponse> GetFlightByFlightNumber(string flightNumber)
+    public async Task<AviationStackResponse> GetFlightByFlightNumber(string flightNumber,CancellationToken cancellationToken)
     {
         var url = $"{_configuration["avion_api_url"]}flights" + 
                   $"?access_key={_configuration["avion_api_key"]}" + 
                   $"&flight_iata={flightNumber}";
 
-        var response = await _httpClient.GetAsync(url);
+        var response = await _httpClient.GetAsync(url,cancellationToken);
         response.EnsureSuccessStatusCode();
 
-        var content = await response.Content.ReadAsStringAsync();
+        var content = await response.Content.ReadAsStringAsync(cancellationToken);
         var result = JsonSerializer.Deserialize<AviationStackResponse>(content);
         
         Console.WriteLine(result);

@@ -15,8 +15,8 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         
         //Comment if u already have database
-        var seeder = new DatabaseSeeder();
-        seeder.SeedDatabase();
+        /*var seeder = new DatabaseSeeder();
+        seeder.SeedDatabase();*/
         
         // Add services to the container.
         builder.Services.AddControllers();

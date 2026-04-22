@@ -17,10 +17,15 @@ public class FlightController : ControllerBase
     
     [HttpGet]
     [Route("[action]")]
-    public async Task<ActionResult<FlightApiResponse>> GetFlightInfo(string flightNumber)
+    public async Task<ActionResult<FlightApiResponse>> GetFlightInfo(string flightNumber,CancellationToken cancellationToken)
     {
-        var response = await _flightService.GetInformationAboutFlight(flightNumber);
-        
-        return response;
+        try
+        {
+            var response = await _flightService.GetInformationAboutFlight(flightNumber, cancellationToken);
+            return response;
+        }catch(OperationCanceledException e)
+        {
+            return StatusCode(StatusCodes.Status499ClientClosedRequest);
+        }
     }
 }
